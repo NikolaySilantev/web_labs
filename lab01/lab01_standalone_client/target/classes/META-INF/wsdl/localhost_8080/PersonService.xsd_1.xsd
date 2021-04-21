@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.5-hudson-$BUILD_NUMBER-. --><xs:schema xmlns:tns="http://mycompany.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://mycompany.com/">
+
+<xs:element name="fields" type="tns:fieldsInter" />
+
+<xs:element name="findRequest" type="tns:findRequest" />
+
+<xs:element name="getPersons" type="tns:getPersons" />
+
+<xs:element name="getPersonsResponse" type="tns:getPersonsResponse" />
+
+<xs:complexType name="getPersons">
+<xs:sequence>
+<xs:element name="fields" type="tns:findRequest" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRequest">
+<xs:sequence>
+<xs:element name="fields" type="tns:fieldsInter" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="fieldsInter">
+<xs:sequence>
+<xs:element name="field" type="xs:string" minOccurs="0" />
+<xs:element name="value" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPersonsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:person" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="person">
+<xs:sequence>
+<xs:element name="age" type="xs:int" />
+<xs:element name="birthplace" type="xs:string" minOccurs="0" />
+<xs:element name="name" type="xs:string" minOccurs="0" />
+<xs:element name="surname" type="xs:string" minOccurs="0" />
+<xs:element name="university" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

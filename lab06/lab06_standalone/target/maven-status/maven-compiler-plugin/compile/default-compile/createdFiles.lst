@@ -1,0 +1,6 @@
+com/mycompany/errors/IllegalNameExceptionMapper.class
+com/mycompany/errors/NotFoundException.class
+com/mycompany/ConnectionUtil.class
+com/mycompany/Person.class
+com/mycompany/Fields.class
+com/mycompany/PostgreSQLDAO.class

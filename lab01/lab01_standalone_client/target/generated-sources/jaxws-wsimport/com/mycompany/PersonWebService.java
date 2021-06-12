@@ -38,4 +38,18 @@ public interface PersonWebService {
         @WebParam(name = "fields", targetNamespace = "")
         FindRequest fields);
 
+    /**
+     * 
+     * @param fileName
+     * @return
+     *     returns byte[]
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "download", targetNamespace = "http://mycompany.com/", className = "com.mycompany.Download")
+    @ResponseWrapper(localName = "downloadResponse", targetNamespace = "http://mycompany.com/", className = "com.mycompany.DownloadResponse")
+    public byte[] download(
+        @WebParam(name = "fileName", targetNamespace = "")
+        String fileName);
+
 }

@@ -24,9 +24,11 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _Download_QNAME = new QName("http://mycompany.com/", "download");
     private final static QName _FindRequest_QNAME = new QName("http://mycompany.com/", "findRequest");
     private final static QName _GetPersons_QNAME = new QName("http://mycompany.com/", "getPersons");
     private final static QName _GetPersonsResponse_QNAME = new QName("http://mycompany.com/", "getPersonsResponse");
+    private final static QName _DownloadResponse_QNAME = new QName("http://mycompany.com/", "downloadResponse");
     private final static QName _Fields_QNAME = new QName("http://mycompany.com/", "fields");
 
     /**
@@ -34,6 +36,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link Download }
+     * 
+     */
+    public Download createDownload() {
+        return new Download();
     }
 
     /**
@@ -50,6 +60,14 @@ public class ObjectFactory {
      */
     public GetPersons createGetPersons() {
         return new GetPersons();
+    }
+
+    /**
+     * Create an instance of {@link DownloadResponse }
+     * 
+     */
+    public DownloadResponse createDownloadResponse() {
+        return new DownloadResponse();
     }
 
     /**
@@ -77,6 +95,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Download }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://mycompany.com/", name = "download")
+    public JAXBElement<Download> createDownload(Download value) {
+        return new JAXBElement<Download>(_Download_QNAME, Download.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link FindRequest }{@code >}}
      * 
      */
@@ -101,6 +128,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://mycompany.com/", name = "getPersonsResponse")
     public JAXBElement<GetPersonsResponse> createGetPersonsResponse(GetPersonsResponse value) {
         return new JAXBElement<GetPersonsResponse>(_GetPersonsResponse_QNAME, GetPersonsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DownloadResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://mycompany.com/", name = "downloadResponse")
+    public JAXBElement<DownloadResponse> createDownloadResponse(DownloadResponse value) {
+        return new JAXBElement<DownloadResponse>(_DownloadResponse_QNAME, DownloadResponse.class, null, value);
     }
 
     /**

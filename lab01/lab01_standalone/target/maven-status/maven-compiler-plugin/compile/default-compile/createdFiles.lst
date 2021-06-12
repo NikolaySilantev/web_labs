@@ -1,9 +1,6 @@
 com/mycompany/ConnectionUtil.class
 com/mycompany/interaction/Person.class
-com/mycompany/PersonWebService.class
 com/mycompany/interaction/FindRequest.class
-com/mycompany/App.class
 com/mycompany/interaction/FieldsInter.class
 com/mycompany/Person.class
 com/mycompany/Fields.class
-com/mycompany/PostgreSQLDAO.class

@@ -1,9 +1,11 @@
-com/mycompany/GetPersons.class
 com/mycompany/PersonService.class
-com/mycompany/PersonWebService.class
 com/mycompany/FindRequest.class
-com/mycompany/ObjectFactory.class
+com/mycompany/Download.class
 com/mycompany/package-info.class
+com/mycompany/GetPersons.class
+com/mycompany/PersonWebService.class
+com/mycompany/ObjectFactory.class
 com/mycompany/FieldsInter.class
+com/mycompany/DownloadResponse.class
 com/mycompany/Person.class
 com/mycompany/GetPersonsResponse.class

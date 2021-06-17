@@ -9,8 +9,10 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.net.httpserver.BasicAuthenticator;
 import java.util.List;
 import javax.ws.rs.core.MediaType;
+import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -22,6 +24,7 @@ public class App {
 
     public static void main(String[] args) {
         Client client = Client.create();
+
         printList(getPerson(client, null, null, null, null, null));
         System.out.println();
         printList(getPerson(client, null, null, null, "Санкт-Петербург", "Университет ИТМО"));
@@ -40,6 +43,7 @@ public class App {
     }
 
     private static List<Person> getPerson(Client client, String name, String surname, String age, String birthplace, String university) {
+
         WebResource webResource = client.resource(URL);
 
         if (name != null) webResource = webResource.queryParam("name", name);
@@ -48,6 +52,7 @@ public class App {
         if (birthplace != null) webResource = webResource.queryParam("birthplace", birthplace);
         if (university != null) webResource = webResource.queryParam("university", university);
         
+        //add header
         ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
         if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
@@ -65,6 +70,13 @@ public class App {
     }
     
     private static String createPerson(Client client, String name, String surname, String age, String birthplace, String university) {
+        //auth
+        String username = "username";
+        String password = "password";
+        String authString = username + ":" + password;
+        String authStringEnc = new BASE64Encoder().encode(authString.getBytes());
+        System.out.println("Base64 encoded auth string: " + authStringEnc);
+        
         WebResource webResource = client.resource(URL);
 
         if (name != null) webResource = webResource.queryParam("name", name);
@@ -73,7 +85,8 @@ public class App {
         if (birthplace != null) webResource = webResource.queryParam("birthplace", birthplace);
         if (university != null) webResource = webResource.queryParam("university", university);
         
-        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).post(ClientResponse.class);
+        //add header
+        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("Authorization", "Basic " + authStringEnc).post(ClientResponse.class);
 
         if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
             throw new IllegalStateException("Request failed");
@@ -83,6 +96,13 @@ public class App {
     }
     
     private static String updatePerson(Client client, String name, String surname, String age, String birthplace, String university, Integer id) {
+        //auth
+        String username = "username";
+        String password = "password";
+        String authString = username + ":" + password;
+        String authStringEnc = new BASE64Encoder().encode(authString.getBytes());
+        System.out.println("Base64 encoded auth string: " + authStringEnc);
+        
         WebResource webResource = client.resource(URL);
 
         if (name != null) webResource = webResource.queryParam("name", name);
@@ -92,7 +112,8 @@ public class App {
         if (university != null) webResource = webResource.queryParam("university", university);
         if (id != null) webResource = webResource.queryParam("id", id.toString());
         
-        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).put(ClientResponse.class);
+        //add header
+        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("Authorization", "Basic " + authStringEnc).put(ClientResponse.class);
 
         //if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
         //    throw new IllegalStateException("Request failed");
@@ -102,9 +123,18 @@ public class App {
     }
     
     private static String deletePerson(Client client, Integer id) {
+        //auth
+        String username = "username";
+        String password = "password";
+        String authString = username + ":" + password;
+        String authStringEnc = new BASE64Encoder().encode(authString.getBytes());
+        System.out.println("Base64 encoded auth string: " + authStringEnc);
+        
         WebResource webResource = client.resource(URL);
         webResource = webResource.queryParam("id", id.toString());
-        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).delete(ClientResponse.class);
+        
+        //add header
+        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("Authorization", "Basic " + authStringEnc).delete(ClientResponse.class);
 
         //if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
         //    throw new IllegalStateException("Request failed");

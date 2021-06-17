@@ -5,33 +5,33 @@
 </xsd:schema>
 </types>
 <message name="getPersons">
-<part name="parameters" element="tns:getPersons" />
+<part name="Request" type="tns:findRequest" />
 </message>
 <message name="getPersonsResponse">
-<part name="parameters" element="tns:getPersonsResponse" />
+<part name="return" type="xsd:string" />
 </message>
 <message name="createPersons">
-<part name="parameters" element="tns:createPersons" />
+<part name="Request" type="tns:createRequest" />
 </message>
 <message name="createPersonsResponse">
-<part name="parameters" element="tns:createPersonsResponse" />
-</message>
-<message name="updatePersons">
-<part name="parameters" element="tns:updatePersons" />
-</message>
-<message name="updatePersonsResponse">
-<part name="parameters" element="tns:updatePersonsResponse" />
+<part name="return" type="xsd:int" />
 </message>
 <message name="NotFoundException">
 <part name="fault" element="tns:NotFoundException" />
 </message>
+<message name="updatePersons">
+<part name="Request" type="tns:updateRequest" />
+</message>
+<message name="updatePersonsResponse">
+<part name="return" type="xsd:string" />
+</message>
 <message name="deletePersons">
-<part name="parameters" element="tns:deletePersons" />
+<part name="Id" type="xsd:int" />
 </message>
 <message name="deletePersonsResponse">
-<part name="parameters" element="tns:deletePersonsResponse" />
+<part name="return" type="xsd:string" />
 </message>
-<portType name="PersonWebService">
+<portType name="PersonWebServiceInterface">
 <operation name="getPersons">
 <input message="tns:getPersons" />
 <output message="tns:getPersonsResponse" />
@@ -39,6 +39,7 @@
 <operation name="createPersons">
 <input message="tns:createPersons" />
 <output message="tns:createPersonsResponse" />
+<fault message="tns:NotFoundException" name="NotFoundException" />
 </operation>
 <operation name="updatePersons">
 <input message="tns:updatePersons" />
@@ -51,33 +52,36 @@
 <fault message="tns:NotFoundException" name="NotFoundException" />
 </operation>
 </portType>
-<binding name="PersonWebServicePortBinding" type="tns:PersonWebService">
-<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+<binding name="PersonWebServicePortBinding" type="tns:PersonWebServiceInterface">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
 <operation name="getPersons">
 <soap:operation soapAction="" />
 <input>
-<soap:body use="literal" />
+<soap:body use="literal" namespace="http://mycompany.com/" />
 </input>
 <output>
-<soap:body use="literal" />
+<soap:body use="literal" namespace="http://mycompany.com/" />
 </output>
 </operation>
 <operation name="createPersons">
 <soap:operation soapAction="" />
 <input>
-<soap:body use="literal" />
+<soap:body use="literal" namespace="http://mycompany.com/" />
 </input>
 <output>
-<soap:body use="literal" />
+<soap:body use="literal" namespace="http://mycompany.com/" />
 </output>
+<fault name="NotFoundException">
+<soap:fault name="NotFoundException" use="literal" />
+</fault>
 </operation>
 <operation name="updatePersons">
 <soap:operation soapAction="" />
 <input>
-<soap:body use="literal" />
+<soap:body use="literal" namespace="http://mycompany.com/" />
 </input>
 <output>
-<soap:body use="literal" />
+<soap:body use="literal" namespace="http://mycompany.com/" />
 </output>
 <fault name="NotFoundException">
 <soap:fault name="NotFoundException" use="literal" />
@@ -86,10 +90,10 @@
 <operation name="deletePersons">
 <soap:operation soapAction="" />
 <input>
-<soap:body use="literal" />
+<soap:body use="literal" namespace="http://mycompany.com/" />
 </input>
 <output>
-<soap:body use="literal" />
+<soap:body use="literal" namespace="http://mycompany.com/" />
 </output>
 <fault name="NotFoundException">
 <soap:fault name="NotFoundException" use="literal" />
